@@ -41,7 +41,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y trivy
     - name: Run Trivy scan
-      run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+      run: trivy fs --exit-code 1 --severity HIGH,CRITICAL . | tee trivy-report.txt
+    - name: Generate Trivy scan summary report
+      run: |
+        trivy fs --severity HIGH,CRITICAL --format json . > trivy-summary.json
+        jq -r '.Results[] | select(.Vulnerabilities != null) | .Vulnerabilities[] | "\(.PkgName) \(.VulnerabilityID) \(.Severity) \(.Title)"' trivy-summary.json > trivy-summary.txt
+    - name: Display Trivy scan results
+      if: always()
+      run: cat trivy-report.txt
+    - name: Display Trivy scan summary report
+      if: always()
+      run: cat trivy-summary.txt
     - name: Block merge if tests fail
       if: failure()
       run: exit 1
