@@ -42,3 +42,6 @@ jobs:
         sudo apt-get install -y trivy
     - name: Run Trivy scan
       run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+    - name: Block merge if tests fail
+      if: failure()
+      run: exit 1
