@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - '**'
+  workflow_dispatch:
 
 jobs:
   trivy-scan:
@@ -26,4 +27,9 @@ jobs:
         sudo apt-get install -y trivy
 
     - name: Run Trivy scan
-      run: trivy fs --exit-code 1 --severity HIGH,CRITICAL .
+      id: trivy-scan
+      run: trivy fs --exit-code 1 --severity HIGH,CRITICAL . | tee trivy-report.txt
+
+    - name: Display Trivy scan results
+      if: always()
+      run: cat trivy-report.txt
