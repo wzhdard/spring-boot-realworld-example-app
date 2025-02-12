@@ -101,3 +101,18 @@ The Trivy GitHub Action workflow outputs the scan results and vulnerabilities in
 - **Installed Version**: The version of the package that is currently installed.
 - **Fixed Version**: The version of the package that contains the fix for the vulnerability.
 - **Description**: A brief description of the vulnerability.
+
+## Trivy Scan Summary Report
+
+The Trivy scan summary report provides an overview of the scan results, including the library, vulnerabilities, misconfigurations, and secrets found during the scan. The summary report helps to quickly identify and address potential security issues in the project.
+
+### Summary Report Format
+
+The summary report includes the following information:
+
+- **Library**: The name of the library or package being scanned.
+- **Vulnerabilities**: A list of vulnerabilities found in the library, including their severity levels and descriptions.
+- **Misconfigurations**: Any misconfigurations detected during the scan, along with their severity levels and descriptions.
+- **Secrets**: Any secrets or sensitive information found during the scan, along with their descriptions.
+
+The summary report is generated and displayed in the GitHub Actions output, providing a comprehensive view of the security status of the project.
