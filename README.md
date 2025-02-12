@@ -101,3 +101,9 @@ The Trivy GitHub Action workflow outputs the scan results and vulnerabilities in
 - **Installed Version**: The version of the package that is currently installed.
 - **Fixed Version**: The version of the package that contains the fix for the vulnerability.
 - **Description**: A brief description of the vulnerability.
+
+## Viewing Trivy Scan Results
+
+To view the Trivy scan results in the action run logs, the workflow includes a step to display the contents of the `trivy-report.txt` file. This file contains the detailed output of the scan results.
+
+The `cat trivy-report.txt` command is used to output the contents of the `trivy-report.txt` file directly in the action run logs. This allows you to see the exact result of the Trivy scan for the application.

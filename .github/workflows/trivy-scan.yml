@@ -28,8 +28,8 @@ jobs:
 
     - name: Run Trivy scan
       id: trivy-scan
-      run: trivy fs --exit-code 1 --severity HIGH,CRITICAL . | tee trivy-report.txt
+      run: trivy fs --exit-code 1 --severity HIGH,CRITICAL --format json . | tee trivy-report.json
 
     - name: Display Trivy scan results
       if: always()
-      run: cat trivy-report.txt
+      run: cat trivy-report.json
