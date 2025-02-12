@@ -1,6 +1,9 @@
 name: Trivy Scan
 
 on:
+  push:
+    branches:
+      - '**'
   pull_request:
     branches:
       - '**'
@@ -31,7 +34,11 @@ jobs:
       id: trivy-summary
       run: |
         trivy fs --severity HIGH,CRITICAL --format json . > trivy-summary.json
-        jq -r '.Results[] | select(.Vulnerabilities != null) | .Vulnerabilities[] | "\(.PkgName) \(.VulnerabilityID) \(.Severity) \(.Title)"' trivy-summary.json > trivy-summary.txt
+        if [ -s trivy-summary.json ]; then
+          jq -r '.Results[] | select(.Vulnerabilities != null) | .Vulnerabilities[] | [.VulnerabilityID, .PkgName, .InstalledVersion, .FixedVersion, .Severity, .Title] | @tsv' trivy-summary.json > trivy-summary.txt
+        else
+          echo "trivy-summary.json is empty or not properly formatted."
+          exit 1
 
     - name: Display Trivy scan results
       if: always()
