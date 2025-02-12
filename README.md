@@ -87,3 +87,17 @@ The purpose of this workflow is to ensure that the project is free from known vu
 ## How to use
 
 The workflow is triggered automatically on push and pull request events. It downloads and runs the Aqua Security Trivy tool to scan the project for vulnerabilities. The results of the scan are displayed in the GitHub Actions tab.
+
+## Automated Trigger
+
+The Trivy GitHub Action workflow is now automatically triggered for new branches and when a pull request is opened or edited. This ensures that every new branch and pull request is scanned for vulnerabilities.
+
+## Output Format
+
+The Trivy GitHub Action workflow outputs the scan results and vulnerabilities in the following format:
+
+- **Severity**: The severity level of the vulnerability (e.g., HIGH, CRITICAL).
+- **Package Name**: The name of the package that contains the vulnerability.
+- **Installed Version**: The version of the package that is currently installed.
+- **Fixed Version**: The version of the package that contains the fix for the vulnerability.
+- **Description**: A brief description of the vulnerability.
