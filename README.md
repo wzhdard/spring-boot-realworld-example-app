@@ -76,6 +76,14 @@ Use spotless for code format.
 
     ./gradlew spotlessJavaApply
 
-# Help
+# GitHub Actions Workflow for Aqua Security Trivy
 
-Please fork and PR to improve the project.
+A new GitHub Actions workflow has been added to perform a security scan using Aqua Security Trivy. This workflow helps to identify vulnerabilities in the project.
+
+## Purpose
+
+The purpose of this workflow is to ensure that the project is free from known vulnerabilities by scanning it with Aqua Security Trivy.
+
+## How to use
+
+The workflow is triggered automatically on push and pull request events. It downloads and runs the Aqua Security Trivy tool to scan the project for vulnerabilities. The results of the scan are displayed in the GitHub Actions tab.
